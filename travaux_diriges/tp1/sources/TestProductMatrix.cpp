@@ -69,6 +69,8 @@ int main(int nargs, char *vargs[])
   int dim = 1024;
   if (nargs > 1)
     dim = atoi(vargs[1]);
+  if (nargs > 2)
+    Matrix::szBlock= atoi(vargs[2]);
   std::vector < double >uA, vA, uB, vB;
   std::tie(uA, vA, uB, vB) = computeTensors(dim);
 

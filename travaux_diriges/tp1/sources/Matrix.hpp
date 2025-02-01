@@ -32,6 +32,8 @@ public:
   double      * data()       { return m_arr_coefs.data(); }
   
   int nbRows, nbCols;
+
+  static int szBlock;
 private:
   std::vector < double >m_arr_coefs;
 };

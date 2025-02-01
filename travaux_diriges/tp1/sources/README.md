@@ -65,18 +65,18 @@ NB : La différence entre les tests en 1024 et 2048 peut être due à d'autres �
 
   OMP_NUM         | MFlops  | MFlops(n=2048) | MFlops(n=512)  | MFlops(n=4096)
 ------------------|---------|----------------|----------------|---------------
-1                 |
-2                 |
-3                 |
-4                 |
-5                 |
-6                 |
-7                 |
-8                 |
+1                 | 1680.99 | 1797.09        | 1858.21        | 1806.02
+2                 | 1804.16 | 1796.25        | 1889.71        | 1801.93
+3                 | 1780.12 | 1803.79        | 1908.36        | 1788.43
+4                 | 1828.35 | 1801.88        | 1985.42        | 1794.83
+5                 | 1785.39 | 1800.98        | 1951.01        | 1796.23
+6                 | 1804.33 | 1792.45        | 1852           | 1792.34
+7                 | 1776.96 | 1805.81        | 1881.95        | 1794.52
+8                 | 1770.39 | 1745.89        | 1863.8         | 1791.85
 
-*Tracer les courbes de speedup (pour chaque valeur de n), discuter les résultats.*
+Il n'y pas d'amélioration significative. Il y a une faible amélioration pour n=512 à 4 ou 5 threads, mais c'est minime. Le calcul lui-même n'est pas le facteur limitant: même avec la combinaison de boucle kji que j'ai utilisée, c'est l'accès mémoire qui diminue l'efficacité.
 
-
+1.4 : L'accéleration due à la parallélisation est limitée par l'accès en mémoire, et cet accès en mémoire n'est pas encore complètement utilisé. Il faudrait organiser les calculs pour qu'ils utilisent au maximum le cache disponible avant de le modifier en accédant à la mémoire RAM.
 
 ### Produit par blocs
 
@@ -84,16 +84,16 @@ NB : La différence entre les tests en 1024 et 2048 peut être due à d'autres �
 
   szBlock         | MFlops  | MFlops(n=2048) | MFlops(n=512)  | MFlops(n=4096)
 ------------------|---------|----------------|----------------|---------------
-origine (=max)    |
-32                |
-64                |
-128               |
-256               |
-512               |
-1024              |
+origine (=4096)   | 2322.19 | 2488.82        | 2765.75        | 2387.66
+32                | 2465.22 | 2373.83        | 2391.21        | 2300.81
+64                | 2257.89 | 2239.47        | 2193.91        | 2136.79
+128               | 2534.99 | 2571.12        | 2469.65        | 2436.67
+256               | 2592.07 | 2732.97        | 2630.09        | 2331.32
+512               | 2365.07 | 2346.36        | 2767.9         | 2349
+1024              | 2478.92 | 2301.5         | 2553.46        | 2336.54
 
-*Discuter les résultats.*
 
+On observe globalement peu d'amélioration en séquentiel par rapport au calcul sans blocks (origine). On peut supposer que le facteur limitant est ici le temps de calcul du processeur.
 
 
 ### Bloc + OMP

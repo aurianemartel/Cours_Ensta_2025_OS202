@@ -11,7 +11,7 @@ CXXFLAGS2 = ${CXXFLAGS} -O2 -march=native -Wall
 CXXFLAGS += -O3 -march=native -Wall
 endif
 
-ALL= calcul_pi.exe TestProductMatrix.exe test_product_matrice_blas.exe 
+ALL= calcul_pi.exe jeton.exe TestProductMatrix.exe test_product_matrice_blas.exe 
 
 default:	help
 
@@ -24,6 +24,9 @@ clean:
 	$(CXX) $(CXXFLAGS2) -c $^ -o $@	
 
 calcul_pi.exe: calcul_pi.cpp
+	$(MPICXX) $(CXXFLAGS) $^ -o $@
+
+jeton.exe: jeton.cpp
 	$(MPICXX) $(CXXFLAGS) $^ -o $@
 
 TestProductMatrix.exe : TestProductMatrix.o Matrix.hpp Matrix.o ProdMatMat.o

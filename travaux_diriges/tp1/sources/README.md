@@ -22,8 +22,7 @@ Caches (sum of all):
   L3:                                       3 MiB (1 instance)
 ```
 
-
-## Produit matrice-matrice
+## Partie 1 : Produit matrice-matrice
 
 ### Effet de la taille de la matrice
 
@@ -144,3 +143,21 @@ Les résultats ne sont pas meilleurs avec la librairie blas, la version par bloc
 ```
     $ for i in $(seq 1 4); do elap=$(OMP_NUM_THREADS=$i ./TestProductOmp.exe|grep "Temps CPU"|cut -d " " -f 7); echo -e "$i\t$elap"; done > timers.out
 ```
+
+
+## Partie 2 : MPI
+
+### Jeton
+
+```
+make jeton.exe
+mpirun -np 4 --host localhost:4 ./jeton.exe 
+```
+
+Affiche : 
+```
+Le jeton vaut 4
+```
+
+
+

@@ -76,6 +76,8 @@ J'ai fait tourner les calculs deux fois pour améliorer la fiabilité des résul
 7                 | 3454.28 | 3402.34        | 3300.57        | 3343.62
 8                 | 3373.64 | 3463.7         | 3187.48        | 3399.2
 
+![Courbes d'évolution tableau 1](aux/q1-3_plots_v1.jpg)
+
 
   OMP_NUM         | MFlops  | MFlops(n=2048) | MFlops(n=512)  | MFlops(n=4096)
 ------------------|---------|----------------|----------------|---------------
@@ -88,7 +90,7 @@ J'ai fait tourner les calculs deux fois pour améliorer la fiabilité des résul
 7                 | 3370.68 | 3338.62        | 3437.97        | 3307.09
 8                 | 3528.89 | 3391.87        | 3221.35        | 3347.77
 
-![Courbes d'évolution tableau 1](aux/q1-3_plots_v1.jpg)
+
 ![Courbes d'évolution tableau 2](aux/q1-3_plots_v2.jpg)
 
 On voit que pour les 4 cas, le parallélisme améliore la vitesse de calcul : l'efficacité augmente fortement jusqu'à 4 threads, puis elle reste globalement stable entre 4 et 8 threads.
@@ -143,12 +145,12 @@ Le parallélisme améliore la performance, fortement entre 1 et 2 threads, et po
 
 blas :
 
-    n   |  MFlops  |
---------|----------|
-  1024  | 2093.22  |
-  2048  | 2115.59  |
-  512   | 2436.86  |
-  4096  | 2300.44  |
+n     |  MFlops  |
+------|----------|
+1024  | 2093.22  |
+2048  | 2115.59  |
+512   | 2436.86  |
+4096  | 2300.44  |
 
 La performance est nettement moins bonne que pour le programme ajusté spécifiquement à mon ordinateur.
 

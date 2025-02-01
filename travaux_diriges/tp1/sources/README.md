@@ -93,21 +93,38 @@ origine (=4096)   | 2322.19 | 2488.82        | 2765.75        | 2387.66
 1024              | 2478.92 | 2301.5         | 2553.46        | 2336.54
 
 
-On observe globalement peu d'amélioration en séquentiel par rapport au calcul sans blocks (origine). On peut supposer que le facteur limitant est ici le temps de calcul du processeur.
+On observe globalement peu d'amélioration en séquentiel par rapport au calcul sans blocks (origine). On peut supposer que le facteur limitant est ici le temps de calcul du processeur. On peut tout de même observer un légère amélioration pour szBlock=128 ou 256.
 
 
 ### Bloc + OMP
 
+  szBlock      | OMP_NUM | MFlops  | MFlops(n=2048) | MFlops(n=512)  | MFlops(n=4096)|
+---------------|---------|---------|----------------|----------------|---------------|
+1024           |  1      | 2158.19 | 2148.14        | 2544.3         | 2164.86       |
+1024           |  4      | 2319.79 | 2087.53        | 2387.25        | 2146.1        |
+1024           |  8      | 2273.88 | 2069.71        | 2452.16        | 2151.35       |
+512            |  1      | 2166.76 | 2116.26        | 2493.46        | 2075.73       |
+512            |  4      | 2108.15 | 2097.6         | 2372.83        | 2021.68       |
+512            |  8      | 1387.27 | 1748.17        | 2545.97        | 2065.54       |
+
+
 
   szBlock      | OMP_NUM | MFlops  | MFlops(n=2048) | MFlops(n=512)  | MFlops(n=4096)|
 ---------------|---------|---------|----------------|----------------|---------------|
-1024           |  1      |         |                |                |               |
-1024           |  8      |         |                |                |               |
-512            |  1      |         |                |                |               |
-512            |  8      |         |                |                |               |
+1024           |  1      | 2158.19 | 2148.14        | 2544.3         | 2164.86       |
+1024           |  4      | 2319.79 | 2087.53        | 2387.25        | 2146.1        |
+1024           |  8      | 2273.88 | 2069.71        | 2452.16        | 2151.35       |
+512            |  1      | 2166.76 | 2116.26        | 2493.46        | 2075.73       |
+512            |  4      | 2108.15 | 2097.6         | 2372.83        | 2021.68       |
+512            |  8      | 1387.27 | 1748.17        | 2545.97        | 2065.54       |
+256            |  1      | 2589.71 | 2538.84        | 2605.12        | 2348.17       |
+256            |  4      | 2619.81 | 2471.43        | 2471.93        | 2307.47       |
+256            |  8      | 2419.77 | 2379.98        | 2528.87        | 2351.02       |
+128            |  1      | 2424.99 | 2366.88        | 2302.4         | 2280.24       |
+128            |  4      | 2060.34 | 2310.48        | 2323.85        | 2257.94       |
+128            |  8      | 2450.3  | 2286.4         | 2412.29        | 2255.85       |
 
-*Discuter les résultats.*
-
+On constate qu'il a un optimum pour une taille de blocks à 256. En revanche, le parallélisme améliore peu le résultat.
 
 ### Comparaison avec BLAS, Eigen et numpy
 

@@ -1,0 +1,256 @@
+szBlock = 1024
+1 threads
+n= 1024
+Using szBlock = 1024
+Test passed
+Temps CPU produit matrice-matrice naif : 0.995041 secondes
+MFlops -> 2158.19
+n= 2048
+Using szBlock = 1024
+Test passed
+Temps CPU produit matrice-matrice naif : 7.99755 secondes
+MFlops -> 2148.14
+n= 512
+Using szBlock = 1024
+Test passed
+Temps CPU produit matrice-matrice naif : 0.105505 secondes
+MFlops -> 2544.3
+n= 4096
+Using szBlock = 1024
+Test passed
+Temps CPU produit matrice-matrice naif : 63.4863 secondes
+MFlops -> 2164.86
+4 threads
+n= 1024
+Using szBlock = 1024
+Test passed
+Temps CPU produit matrice-matrice naif : 0.925721 secondes
+MFlops -> 2319.79
+n= 2048
+Using szBlock = 1024
+Test passed
+Temps CPU produit matrice-matrice naif : 8.22975 secondes
+MFlops -> 2087.53
+n= 512
+Using szBlock = 1024
+Test passed
+Temps CPU produit matrice-matrice naif : 0.112446 secondes
+MFlops -> 2387.25
+n= 4096
+Using szBlock = 1024
+Test passed
+Temps CPU produit matrice-matrice naif : 64.0413 secondes
+MFlops -> 2146.1
+8 threads
+n= 1024
+Using szBlock = 1024
+Test passed
+Temps CPU produit matrice-matrice naif : 0.944414 secondes
+MFlops -> 2273.88
+n= 2048
+Using szBlock = 1024
+Test passed
+Temps CPU produit matrice-matrice naif : 8.30062 secondes
+MFlops -> 2069.71
+n= 512
+Using szBlock = 1024
+Test passed
+Temps CPU produit matrice-matrice naif : 0.109469 secondes
+MFlops -> 2452.16
+n= 4096
+Using szBlock = 1024
+Test passed
+Temps CPU produit matrice-matrice naif : 63.8848 secondes
+MFlops -> 2151.35
+szBlock = 512
+1 threads
+n= 1024
+Using szBlock = 512
+Test passed
+Temps CPU produit matrice-matrice naif : 0.991105 secondes
+MFlops -> 2166.76
+n= 2048
+Using szBlock = 512
+Test passed
+Temps CPU produit matrice-matrice naif : 8.11803 secondes
+MFlops -> 2116.26
+n= 512
+Using szBlock = 512
+Test passed
+Temps CPU produit matrice-matrice naif : 0.107656 secondes
+MFlops -> 2493.46
+n= 4096
+Using szBlock = 512
+Test passed
+Temps CPU produit matrice-matrice naif : 66.2124 secondes
+MFlops -> 2075.73
+4 threads
+n= 1024
+Using szBlock = 512
+Test passed
+Temps CPU produit matrice-matrice naif : 1.01866 secondes
+MFlops -> 2108.15
+n= 2048
+Using szBlock = 512
+Test passed
+Temps CPU produit matrice-matrice naif : 8.19024 secondes
+MFlops -> 2097.6
+n= 512
+Using szBlock = 512
+Test passed
+Temps CPU produit matrice-matrice naif : 0.113129 secondes
+MFlops -> 2372.83
+n= 4096
+Using szBlock = 512
+Test passed
+Temps CPU produit matrice-matrice naif : 67.9827 secondes
+MFlops -> 2021.68
+8 threads
+n= 1024
+Using szBlock = 512
+Test passed
+Temps CPU produit matrice-matrice naif : 1.54799 secondes
+MFlops -> 1387.27
+n= 2048
+Using szBlock = 512
+Test passed
+Temps CPU produit matrice-matrice naif : 9.82734 secondes
+MFlops -> 1748.17
+n= 512
+Using szBlock = 512
+Test passed
+Temps CPU produit matrice-matrice naif : 0.105436 secondes
+MFlops -> 2545.97
+n= 4096
+Using szBlock = 512
+Test passed
+Temps CPU produit matrice-matrice naif : 66.5389 secondes
+MFlops -> 2065.54
+szBlock = 256
+1 threads
+n= 1024
+Using szBlock = 256
+Test passed
+Temps CPU produit matrice-matrice naif : 0.829236 secondes
+MFlops -> 2589.71
+n= 2048
+Using szBlock = 256
+Test passed
+Temps CPU produit matrice-matrice naif : 6.76683 secondes
+MFlops -> 2538.84
+n= 512
+Using szBlock = 256
+Test passed
+Temps CPU produit matrice-matrice naif : 0.103042 secondes
+MFlops -> 2605.12
+n= 4096
+Using szBlock = 256
+Test passed
+Temps CPU produit matrice-matrice naif : 58.5303 secondes
+MFlops -> 2348.17
+4 threads
+n= 1024
+Using szBlock = 256
+Test passed
+Temps CPU produit matrice-matrice naif : 0.819711 secondes
+MFlops -> 2619.81
+n= 2048
+Using szBlock = 256
+Test passed
+Temps CPU produit matrice-matrice naif : 6.9514 secondes
+MFlops -> 2471.43
+n= 512
+Using szBlock = 256
+Test passed
+Temps CPU produit matrice-matrice naif : 0.108593 secondes
+MFlops -> 2471.93
+n= 4096
+Using szBlock = 256
+Test passed
+Temps CPU produit matrice-matrice naif : 59.5627 secondes
+MFlops -> 2307.47
+8 threads
+n= 1024
+Using szBlock = 256
+Test passed
+Temps CPU produit matrice-matrice naif : 0.887475 secondes
+MFlops -> 2419.77
+n= 2048
+Using szBlock = 256
+Test passed
+Temps CPU produit matrice-matrice naif : 7.21849 secondes
+MFlops -> 2379.98
+n= 512
+Using szBlock = 256
+Test passed
+Temps CPU produit matrice-matrice naif : 0.106149 secondes
+MFlops -> 2528.87
+n= 4096
+Using szBlock = 256
+Test passed
+Temps CPU produit matrice-matrice naif : 58.4592 secondes
+MFlops -> 2351.02
+szBlock = 128
+1 threads
+n= 1024
+Using szBlock = 128
+Test passed
+Temps CPU produit matrice-matrice naif : 0.885562 secondes
+MFlops -> 2424.99
+n= 2048
+Using szBlock = 128
+Test passed
+Temps CPU produit matrice-matrice naif : 7.25845 secondes
+MFlops -> 2366.88
+n= 512
+Using szBlock = 128
+Test passed
+Temps CPU produit matrice-matrice naif : 0.116589 secondes
+MFlops -> 2302.4
+n= 4096
+Using szBlock = 128
+Test passed
+Temps CPU produit matrice-matrice naif : 60.274 secondes
+MFlops -> 2280.24
+4 threads
+n= 1024
+Using szBlock = 128
+Test passed
+Temps CPU produit matrice-matrice naif : 1.0423 secondes
+MFlops -> 2060.34
+n= 2048
+Using szBlock = 128
+Test passed
+Temps CPU produit matrice-matrice naif : 7.43563 secondes
+MFlops -> 2310.48
+n= 512
+Using szBlock = 128
+Test passed
+Temps CPU produit matrice-matrice naif : 0.115513 secondes
+MFlops -> 2323.85
+n= 4096
+Using szBlock = 128
+Test passed
+Temps CPU produit matrice-matrice naif : 60.8691 secondes
+MFlops -> 2257.94
+8 threads
+n= 1024
+Using szBlock = 128
+Test passed
+Temps CPU produit matrice-matrice naif : 0.876418 secondes
+MFlops -> 2450.3
+n= 2048
+Using szBlock = 128
+Test passed
+Temps CPU produit matrice-matrice naif : 7.51393 secondes
+MFlops -> 2286.4
+n= 512
+Using szBlock = 128
+Test passed
+Temps CPU produit matrice-matrice naif : 0.111278 secondes
+MFlops -> 2412.29
+n= 4096
+Using szBlock = 128
+Test passed
+Temps CPU produit matrice-matrice naif : 60.9255 secondes
+MFlops -> 2255.85

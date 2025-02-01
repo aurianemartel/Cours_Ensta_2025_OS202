@@ -58,22 +58,40 @@ Les matrices sont rangées dans la mémoire par colonnes. C'est l'indice le plus
 
 NB : La différence entre les tests en 1024 et 2048 peut être due à d'autres événements, comme un changement de fenêtre pour noter les réponses.
 
+
 ### OMP sur la meilleure boucle
 
 `make TestProduct.exe && OMP_NUM_THREADS=8 ./TestProduct.exe 1024`
 
+J'ai fait tourner les calculs deux fois pour améliorer la fiabilité des résultats.
+
   OMP_NUM         | MFlops  | MFlops(n=2048) | MFlops(n=512)  | MFlops(n=4096)
 ------------------|---------|----------------|----------------|---------------
-1                 | 1680.99 | 1797.09        | 1858.21        | 1806.02
-2                 | 1804.16 | 1796.25        | 1889.71        | 1801.93
-3                 | 1780.12 | 1803.79        | 1908.36        | 1788.43
-4                 | 1828.35 | 1801.88        | 1985.42        | 1794.83
-5                 | 1785.39 | 1800.98        | 1951.01        | 1796.23
-6                 | 1804.33 | 1792.45        | 1852           | 1792.34
-7                 | 1776.96 | 1805.81        | 1881.95        | 1794.52
-8                 | 1770.39 | 1745.89        | 1863.8         | 1791.85
+1                 | 1840.44 | 1769.42        | 1631.12        | 1782.36
+2                 | 2999.26 | 2935.47        | 3287.55        | 3035.05
+3                 | 3130.12 | 3124.28        | 1454.48        | 3149.01
+4                 | 2701.39 | 3310.24        | 3102.82        | 3292.18
+5                 | 3381.29 | 3315.47        | 3298.26        | 3279.02
+6                 | 2930.58 | 3314.35        | 3402.97        | 3297.57
+7                 | 3454.28 | 3402.34        | 3300.57        | 3343.62
+8                 | 3373.64 | 3463.7         | 3187.48        | 3399.2
 
-Il n'y pas d'amélioration significative. Il y a une faible amélioration pour n=512 à 4 ou 5 threads, mais c'est minime. Le calcul lui-même n'est pas le facteur limitant: même avec la combinaison de boucle kji que j'ai utilisée, c'est l'accès mémoire qui diminue l'efficacité.
+
+  OMP_NUM         | MFlops  | MFlops(n=2048) | MFlops(n=512)  | MFlops(n=4096)
+------------------|---------|----------------|----------------|---------------
+1                 | 1789.59 | 1866.56        | 1868.86        | 1745.08
+2                 | 2809.43 | 2735.33        | 1939.28        | 2792.64
+3                 | 2716.26 | 3035.49        | 3033.78        | 2976.46
+4                 | 3364.56 | 3283.31        | 3003.24        | 3185.23
+5                 | 3084.71 | 3124.86        | 3262.53        | 3226.81
+6                 | 3199.67 | 3313.94        | 3311.39        | 3258.23
+7                 | 3370.68 | 3338.62        | 3437.97        | 3307.09
+8                 | 3528.89 | 3391.87        | 3221.35        | 3347.77
+
+![Courbes d'évolution tableau 1](aux/q1-3_plots_v1.jpg)
+![Courbes d'évolution tableau 2](aux/q1-3_plots_v2.jpg)
+
+On voit que pour les 4 cas, le parallélisme améliore la vitesse de calcul : l'efficacité augmente fortement jusqu'à 4 threads, puis elle reste globalement stable entre 4 et 8 threads.
 
 1.4 : L'accéleration due à la parallélisation est limitée par l'accès en mémoire, et cet accès en mémoire n'est pas encore complètement utilisé. Il faudrait organiser les calculs pour qu'ils utilisent au maximum le cache disponible avant de le modifier en accédant à la mémoire RAM.
 
@@ -99,30 +117,31 @@ On observe globalement peu d'amélioration en séquentiel par rapport au calcul 
 
   szBlock      | OMP_NUM | MFlops  | MFlops(n=2048) | MFlops(n=512)  | MFlops(n=4096)|
 ---------------|---------|---------|----------------|----------------|---------------|
-1024           |  1      | 2158.19 | 2148.14        | 2544.3         | 2164.86       |
-1024           |  2      | 2295.34 | 1986.92        | 2282.36        | 2144.11       |
-1024           |  4      | 2319.79 | 2087.53        | 2387.25        | 2146.1        |
-1024           |  8      | 2273.88 | 2069.71        | 2452.16        | 2151.35       |
-512            |  1      | 2166.76 | 2116.26        | 2493.46        | 2075.73       |
-512            |  2      | 2108.2  | 2084.48        | 2433.2         | 1983.04       |
-512            |  4      | 2108.15 | 2097.6         | 2372.83        | 2021.68       |
-512            |  8      | 1387.27 | 1748.17        | 2545.97        | 2065.54       |
-256            |  1      | 2589.71 | 2538.84        | 2605.12        | 2348.17       |
-256            |  2      | 2586.52 | 2418.25        | 2315.79        | 1917.82       |
-256            |  4      | 2619.81 | 2471.43        | 2471.93        | 2307.47       |
-256            |  8      | 2419.77 | 2379.98        | 2528.87        | 2351.02       |
-128            |  1      | 2424.99 | 2366.88        | 2302.4         | 2280.24       |
-128            |  2      | 2153.06 | 2297.08        | 2150.84        | 1731.65       |
-128            |  4      | 2060.34 | 2310.48        | 2323.85        | 2257.94       |
-128            |  8      | 2450.3  | 2286.4         | 2412.29        | 2255.85       |
+1024           |  1      | 2009.26 | 1868.78        | 2018.31        | 1882.1        |
+1024           |  2      | 2989.19 | 3368.09        | 3366.47        | 3438.61       |
+1024           |  4      | 3805.23 | 3679.67        | 3866.95        | 3684.3        |
+1024           |  8      | 3702.36 | 3646.61        | 3774.61        | 3666.21       |
+512            |  1      | 1809.59 | 1816.55        | 2048.59        | 1802.6        |
+512            |  2      | 3292.16 | 3442.19        | 3801.31        | 3396.5        |
+512            |  4      | 3687.35 | 3706.96        | 3867.5         | 3729.47       |
+512            |  8      | 3742.68 | 3748.59        | 3866.78        | 3732.73       |
+256            |  1      | 2105.94 | 2080.55        | 2053.34        | 1908.38       |
+256            |  2      | 3971.44 | 3610           | 3723.38        | 3720.51       |
+256            |  4      | 3303.29 | 3976.73        | 3775.78        | 3870.94       |
+256            |  8      | 3890.75 | 3863.7         | 3711.48        | 3672.22       |
+128            |  1      | 2025.56 | 2046.62        | 2030.66        | 1966.6        |
+128            |  2      | 3836.3  | 3786.41        | 3713.75        | 3639.35       |
+128            |  4      | 3189.98 | 3867.11        | 3548.92        | 3774.33       |
+128            |  8      | 3837.83 | 3707.77        | 3615.42        | 3657.45       |
 
+![Visualisation graphique du tableau](aux/q1-7_plots_multi.jpg)
 
-On constate qu'il a un optimum pour une taille de blocks à 256. En revanche, le parallélisme améliore peu le résultat. Notre supposition précédente était fausse, la limite est vraiment l'accès en mémoire. Le calcul de multiplication et d'addition n'est probablement pas suffisement complexe pour que la parallélisation fasse une différence.
+Le parallélisme améliore la performance, fortement entre 1 et 2 threads, et pour certains n entre 2 et 4 threads, puis le résultat reste stable entre 4 et 8 threads. La performance est globlament meilleure pour des blocs de taille 256 ou 128, sauf pour n=512, où il semblerait que traiter les matrices en un bloc marche mieux (elles tiennent pratiquement dans le cache L3).
+
 
 ### Comparaison avec BLAS, Eigen et numpy
 
 blas :
-
 
     n   |  MFlops  |
 --------|----------|
@@ -131,7 +150,7 @@ blas :
   512   | 2436.86  |
   4096  | 2300.44  |
 
-Les résultats ne sont pas meilleurs avec la librairie blas, la version par blocks de taille 256 est meilleure, sauf pour n=4096, où c'est équivalent.
+La performance est nettement moins bonne que pour le programme ajusté spécifiquement à mon ordinateur.
 
 # Tips
 

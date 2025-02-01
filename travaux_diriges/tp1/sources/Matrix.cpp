@@ -10,4 +10,4 @@ Matrix::Matrix( int nRows, int nCols, double val ) :
 {}
 // ========================================================================
 
-int Matrix::szBlock = 32;
+int Matrix::szBlock = 10000;

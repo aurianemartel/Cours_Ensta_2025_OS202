@@ -16,137 +16,137 @@ from these results :
 1 threads
 n= 1024
 Test passed
-Temps CPU produit matrice-matrice naif : 1.27751 secondes
-MFlops -> 1680.99
+Temps CPU produit matrice-matrice naif : 1.19998 secondes
+MFlops -> 1789.59
 n= 2048
 Test passed
-Temps CPU produit matrice-matrice naif : 9.55984 secondes
-MFlops -> 1797.09
+Temps CPU produit matrice-matrice naif : 9.20402 secondes
+MFlops -> 1866.56
 n= 512
 Test passed
-Temps CPU produit matrice-matrice naif : 0.144459 secondes
-MFlops -> 1858.21
+Temps CPU produit matrice-matrice naif : 0.143636 secondes
+MFlops -> 1868.86
 n= 4096
 Test passed
-Temps CPU produit matrice-matrice naif : 76.1003 secondes
-MFlops -> 1806.02
+Temps CPU produit matrice-matrice naif : 78.7579 secondes
+MFlops -> 1745.08
 2 threads
 n= 1024
 Test passed
-Temps CPU produit matrice-matrice naif : 1.1903 secondes
-MFlops -> 1804.16
+Temps CPU produit matrice-matrice naif : 0.764385 secondes
+MFlops -> 2809.43
 n= 2048
 Test passed
-Temps CPU produit matrice-matrice naif : 9.56432 secondes
-MFlops -> 1796.25
+Temps CPU produit matrice-matrice naif : 6.28072 secondes
+MFlops -> 2735.33
 n= 512
 Test passed
-Temps CPU produit matrice-matrice naif : 0.142051 secondes
-MFlops -> 1889.71
+Temps CPU produit matrice-matrice naif : 0.13842 secondes
+MFlops -> 1939.28
 n= 4096
 Test passed
-Temps CPU produit matrice-matrice naif : 76.2733 secondes
-MFlops -> 1801.93
+Temps CPU produit matrice-matrice naif : 49.2147 secondes
+MFlops -> 2792.64
 3 threads
 n= 1024
 Test passed
-Temps CPU produit matrice-matrice naif : 1.20637 secondes
-MFlops -> 1780.12
+Temps CPU produit matrice-matrice naif : 0.790605 secondes
+MFlops -> 2716.26
 n= 2048
 Test passed
-Temps CPU produit matrice-matrice naif : 9.52433 secondes
-MFlops -> 1803.79
+Temps CPU produit matrice-matrice naif : 5.65966 secondes
+MFlops -> 3035.49
 n= 512
 Test passed
-Temps CPU produit matrice-matrice naif : 0.140663 secondes
-MFlops -> 1908.36
+Temps CPU produit matrice-matrice naif : 0.0884822 secondes
+MFlops -> 3033.78
 n= 4096
 Test passed
-Temps CPU produit matrice-matrice naif : 76.8489 secondes
-MFlops -> 1788.43
+Temps CPU produit matrice-matrice naif : 46.1752 secondes
+MFlops -> 2976.46
 4 threads
 n= 1024
 Test passed
-Temps CPU produit matrice-matrice naif : 1.17455 secondes
-MFlops -> 1828.35
+Temps CPU produit matrice-matrice naif : 0.638265 secondes
+MFlops -> 3364.56
 n= 2048
 Test passed
-Temps CPU produit matrice-matrice naif : 9.53444 secondes
-MFlops -> 1801.88
+Temps CPU produit matrice-matrice naif : 5.23249 secondes
+MFlops -> 3283.31
 n= 512
 Test passed
-Temps CPU produit matrice-matrice naif : 0.135203 secondes
-MFlops -> 1985.42
+Temps CPU produit matrice-matrice naif : 0.0893821 secondes
+MFlops -> 3003.24
 n= 4096
 Test passed
-Temps CPU produit matrice-matrice naif : 76.5749 secondes
-MFlops -> 1794.83
+Temps CPU produit matrice-matrice naif : 43.1489 secondes
+MFlops -> 3185.23
 5 threads
 n= 1024
 Test passed
-Temps CPU produit matrice-matrice naif : 1.20281 secondes
-MFlops -> 1785.39
+Temps CPU produit matrice-matrice naif : 0.69617 secondes
+MFlops -> 3084.71
 n= 2048
 Test passed
-Temps CPU produit matrice-matrice naif : 9.53918 secondes
-MFlops -> 1800.98
+Temps CPU produit matrice-matrice naif : 5.49781 secondes
+MFlops -> 3124.86
 n= 512
 Test passed
-Temps CPU produit matrice-matrice naif : 0.137588 secondes
-MFlops -> 1951.01
+Temps CPU produit matrice-matrice naif : 0.0822783 secondes
+MFlops -> 3262.53
 n= 4096
 Test passed
-Temps CPU produit matrice-matrice naif : 76.5153 secondes
-MFlops -> 1796.23
+Temps CPU produit matrice-matrice naif : 42.5928 secondes
+MFlops -> 3226.81
 6 threads
 n= 1024
 Test passed
-Temps CPU produit matrice-matrice naif : 1.19018 secondes
-MFlops -> 1804.33
+Temps CPU produit matrice-matrice naif : 0.671157 secondes
+MFlops -> 3199.67
 n= 2048
 Test passed
-Temps CPU produit matrice-matrice naif : 9.58457 secondes
-MFlops -> 1792.45
+Temps CPU produit matrice-matrice naif : 5.18413 secondes
+MFlops -> 3313.94
 n= 512
 Test passed
-Temps CPU produit matrice-matrice naif : 0.144943 secondes
-MFlops -> 1852
+Temps CPU produit matrice-matrice naif : 0.0810644 secondes
+MFlops -> 3311.39
 n= 4096
 Test passed
-Temps CPU produit matrice-matrice naif : 76.6813 secondes
-MFlops -> 1792.34
+Temps CPU produit matrice-matrice naif : 42.182 secondes
+MFlops -> 3258.23
 7 threads
 n= 1024
 Test passed
-Temps CPU produit matrice-matrice naif : 1.20852 secondes
-MFlops -> 1776.96
+Temps CPU produit matrice-matrice naif : 0.637107 secondes
+MFlops -> 3370.68
 n= 2048
 Test passed
-Temps CPU produit matrice-matrice naif : 9.51365 secondes
-MFlops -> 1805.81
+Temps CPU produit matrice-matrice naif : 5.1458 secondes
+MFlops -> 3338.62
 n= 512
 Test passed
-Temps CPU produit matrice-matrice naif : 0.142637 secondes
-MFlops -> 1881.95
+Temps CPU produit matrice-matrice naif : 0.0780796 secondes
+MFlops -> 3437.97
 n= 4096
 Test passed
-Temps CPU produit matrice-matrice naif : 76.5883 secondes
-MFlops -> 1794.52
+Temps CPU produit matrice-matrice naif : 41.5589 secondes
+MFlops -> 3307.09
 8 threads
 n= 1024
 Test passed
-Temps CPU produit matrice-matrice naif : 1.213 secondes
-MFlops -> 1770.39
+Temps CPU produit matrice-matrice naif : 0.608543 secondes
+MFlops -> 3528.89
 n= 2048
 Test passed
-Temps CPU produit matrice-matrice naif : 9.84021 secondes
-MFlops -> 1745.89
+Temps CPU produit matrice-matrice naif : 5.06502 secondes
+MFlops -> 3391.87
 n= 512
 Test passed
-Temps CPU produit matrice-matrice naif : 0.144026 secondes
-MFlops -> 1863.8
+Temps CPU produit matrice-matrice naif : 0.0833301 secondes
+MFlops -> 3221.35
 n= 4096
 Test passed
-Temps CPU produit matrice-matrice naif : 76.7021 secondes
-MFlops -> 1791.85
+Temps CPU produit matrice-matrice naif : 41.0539 secondes
+MFlops -> 3347.77
 >>

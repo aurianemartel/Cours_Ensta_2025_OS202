@@ -8,7 +8,18 @@
 *lscpu donne des infos utiles sur le processeur : nb core, taille de cache :*
 
 ```
-Coller ici les infos *utiles* de lscpu.
+Processeur(s) :                         4
+Thread(s) par cœur :                    2
+Cœur(s) par socket :                    2
+Socket:                                 1
+
+Donc 2 coeurs réellement, qui en hyperthreading donnent 4 threads parallèles.
+
+Caches (sum of all):                        
+  L1d:                                      64 KiB (2 instances)
+  L1i:                                      64 KiB (2 instances)
+  L2:                                       512 KiB (2 instances)
+  L3:                                       3 MiB (1 instance)
 ```
 
 
@@ -18,13 +29,13 @@ Coller ici les infos *utiles* de lscpu.
 
   n            | MFlops
 ---------------|--------
-1024 (origine) |
-               |
-               |
-               |
-               |
+1024 (origine) |111
+1023           |115
+1025           |115
 
-*Expliquer les résultats.*
+L'alignement de la taille de la matrice avec la longueur des blocs de cache peut engendrer des pertes d'efficacité de la gestion du cache. En effet, les lignes de caches sont organisées en sets, et le choix du set pour une case mémoire est déterminé par un modulo sur une puissance de deux. Si la matrice est d'une taille puissance de deux, quand j'itère sur une des dimensions d'une matrice, je n'ai accès qu'à certains de ces sets. C'est une limitation artificielle de la taille de mon cache, donc je dois accéder à ma mémoire RAM plus souvent.
+
+Cela n'est pas flagrant sur mon ordinateur, peut-être que mon processeur intègre des mécanismes de gestion de cache "intelligent" qui réduisent ces pertes d'efficacité, du type prefetch intelligent.
 
 
 ### Permutation des boucles
@@ -36,17 +47,17 @@ Coller ici les infos *utiles* de lscpu.
 
   ordre           | time    | MFlops  | MFlops(n=2048)
 ------------------|---------|---------|----------------
-i,j,k (origine)   | 2.73764 | 782.476 |
-j,i,k             |         |         |
-i,k,j             |         |         |
-k,i,j             |         |         |
-j,k,i             |         |         |
-k,j,i             |         |         |
+i,k,j (origine)   | 19.6741 | 109.153 | 85.5885
+i,j,k             | 8.57384 | 250.469 | 191.796
+j,i,k             | 8.82752 | 243.272 | 190.058
+j,k,i             | 0.896604| 2395.13 | 2419.98
+k,i,j             | 18.9484 | 113.333 | 86.7403
+k,j,i             | 1.05376 | 2037.92 | 2023.19
 
 
-*Discuter les résultats.*
+Les matrices sont rangées dans la mémoire par colonnes. C'est l'indice le plus à l'intérieur qui bouge le plus souvent. i concerne les colonnes de A et de C, le calcul est donc plus efficace quand i est au centre (j,k,i et k,j,i), puisqu'on maximise l'usage du cache pour les deux matrices à la fois. À l'inverse, le calcul est beaucoup moins efficace quand j est au centre, puisqu'en itérant sur les lignes on ne fait pas usage du cache et on accède à chaque fois à la mémoire RAM.
 
-
+NB : La différence entre les tests en 1024 et 2048 peut être due à d'autres événements, comme un changement de fenêtre pour noter les réponses.
 
 ### OMP sur la meilleure boucle
 

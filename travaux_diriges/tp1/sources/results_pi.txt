@@ -1,0 +1,73 @@
+Séquentiel :
+nbSamples =  10000000
+pi = 3.14127
+Temps CPU : 0.269046 secondes
+nbSamples =  10000000000
+pi = 3.14161
+Temps CPU : 37.9256 secondes
+OpenMP :
+nbSamples =  10000000
+nbThreads =  1
+pi = 3.14107
+Temps CPU : 0.263294 secondes
+nbSamples =  10000000
+nbThreads =  2
+pi = 3.14124
+Temps CPU : 0.138471 secondes
+nbSamples =  10000000
+nbThreads =  4
+pi = 3.14186
+Temps CPU : 0.102927 secondes
+nbSamples =  10000000
+nbThreads =  8
+pi = 3.14075
+Temps CPU : 0.110133 secondes
+nbSamples =  10000000000
+nbThreads =  1
+pi = 3.14158
+Temps CPU : 37.0673 secondes
+nbSamples =  10000000000
+nbThreads =  2
+pi = 3.14161
+Temps CPU : 18.748 secondes
+nbSamples =  10000000000
+nbThreads =  4
+pi = 3.14151
+Temps CPU : 13.8395 secondes
+nbSamples =  10000000000
+nbThreads =  8
+pi = 3.14159
+Temps CPU : 13.9558 secondes
+MPI :
+nbSamples =  10000000
+nbThreads =  1
+pi = 3.14104
+Temps CPU : 0.559076 secondes
+nbSamples =  10000000
+nbThreads =  2
+pi = 3.14218
+Temps CPU : 0.410553 secondes
+nbSamples =  10000000
+nbThreads =  4
+pi = 3.14173
+Temps CPU : 0.38731 secondes
+nbSamples =  10000000
+nbThreads =  8
+pi = 3.14182
+Temps CPU : 0.525076 secondes
+nbSamples =  10000000000
+nbThreads =  1
+pi = 3.14158
+Temps CPU : 45.6301 secondes
+nbSamples =  10000000000
+nbThreads =  2
+pi = 3.14155
+Temps CPU : 23.1522 secondes
+nbSamples =  10000000000
+nbThreads =  4
+pi = 3.1416
+Temps CPU : 15.4362 secondes
+nbSamples =  10000000000
+nbThreads =  8
+pi = 3.14163
+Temps CPU : 15.7728 secondes

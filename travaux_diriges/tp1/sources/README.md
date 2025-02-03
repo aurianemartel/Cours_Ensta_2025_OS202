@@ -180,5 +180,64 @@ Affiche :
 Le jeton vaut 4
 ```
 
+### Calcul de pi
 
+On obtient :
+```
+Séquentiel :
+nbSamples =  10000000
+pi = 3.14127
+Temps CPU : 0.269046 secondes
 
+nbSamples =  10000000000
+pi = 3.14161
+Temps CPU : 37.9256 secondes
+
+OpenMP :
+nbSamples =  10000000
+nbThreads =  1
+pi = 3.14107
+Temps CPU : 0.263294 secondes
+nbThreads =  4
+pi = 3.14186
+Temps CPU : 0.102927 secondes
+nbThreads =  8
+pi = 3.14075
+Temps CPU : 0.110133 secondes
+
+nbSamples =  10000000000
+nbThreads =  1
+pi = 3.14158
+Temps CPU : 37.0673 secondes
+nbThreads =  4
+pi = 3.14151
+Temps CPU : 13.8395 secondes
+nbThreads =  8
+pi = 3.14159
+Temps CPU : 13.9558 secondes
+
+MPI :
+nbSamples =  10000000
+nbThreads =  1
+pi = 3.14104
+Temps CPU : 0.559076 secondes
+nbThreads =  4
+pi = 3.14173
+Temps CPU : 0.38731 secondes
+nbThreads =  8
+pi = 3.14182
+Temps CPU : 0.525076 secondes
+
+nbSamples =  10000000000
+nbThreads =  1
+pi = 3.14158
+Temps CPU : 45.6301 secondes
+nbThreads =  4
+pi = 3.1416
+Temps CPU : 15.4362 secondes
+nbThreads =  8
+pi = 3.14163
+Temps CPU : 15.7728 secondes
+```
+
+La parallélisation à quatre threads améliore d'un facteur 3, en OpenMP comme en MPI (un peu mieux en OpenMP). À 8 threads, on obtient un résultat similaire, voire un peu moins bien qu'à quatre threads. C'est cohérent avec mon cpu qui dispose de quatre hyper-threads sur deux coeurs.

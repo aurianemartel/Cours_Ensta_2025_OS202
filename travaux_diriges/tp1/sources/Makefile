@@ -11,7 +11,7 @@ CXXFLAGS2 = ${CXXFLAGS} -O2 -march=native -Wall -fopenmp
 CXXFLAGS += -O3 -march=native -Wall
 endif
 
-ALL= calcul_pi.exe jeton.exe TestProductMatrix.exe test_product_matrice_blas.exe 
+ALL= TestProductMatrix.exe test_product_matrice_blas.exe jeton.exe calcul_pi_seq.exe calcul_pi_OpenMP.exe calcul_pi_MPI.exe
 
 default:	help
 
@@ -23,7 +23,13 @@ clean:
 .cpp.o:
 	$(CXX) $(CXXFLAGS2) -c $^ -o $@	
 
-calcul_pi.exe: calcul_pi.cpp
+calcul_pi_seq.exe: calcul_pi_seq.cpp
+	$(CXX) $(CXXFLAGS2) $^ -o $@
+
+calcul_pi_OpenMP.exe: calcul_pi_OpenMP.cpp
+	$(CXX) $(CXXFLAGS2) $^ -o $@
+
+calcul_pi_MPI.exe: calcul_pi_MPI.cpp
 	$(MPICXX) $(CXXFLAGS) $^ -o $@
 
 jeton.exe: jeton.cpp

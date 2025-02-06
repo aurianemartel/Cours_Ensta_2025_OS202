@@ -14,4 +14,9 @@ if rank==0: glob_array = np.empty(N,dtype=np.int64)
 
 globCom.Gather(loc_array, glob_array)
 
-if rank==0: print(f"global array: {glob_array}")
+bar = globCom.gather(loc_array, root=0)
+
+if rank==0: 
+    foo = np.concatenate(bar, axis=0)
+    print(f"foo is {foo}")
+    print(f"global array: {glob_array}")

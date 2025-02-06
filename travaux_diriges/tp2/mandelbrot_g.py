@@ -91,13 +91,16 @@ for y in range(0, height_bloc):
 pprint(f"Shape loc_convergence :{loc_convergence.shape}\n")
 
 # Gather : 
-globCom.Gather(loc_convergence, glob_convergence)
+#globCom.Gather(loc_convergence, glob_convergence)
+
+glob_convergence = globCom.gather(loc_convergence, root=0)
 
 if rank==0:
     fin = time()
     print(f"Temps du calcul de l'ensemble de Mandelbrot : {fin-deb}")
 
-    pprint(f"Shape glob_convergence :{glob_convergence.shape}\n")
+    glob_convergence = np.concatenate(glob_convergence, axis=1)
+
     # Constitution de l'image résultante :
     deb = time()
     image = Image.fromarray(np.uint8(matplotlib.cm.plasma(glob_convergence.T)*255))

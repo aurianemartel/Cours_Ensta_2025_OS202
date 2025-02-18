@@ -24,6 +24,11 @@ On itère ensuite pour étudier la façon dont évolue la population des cellule
 import pygame  as pg
 import numpy   as np
 
+from mpi4py import MPI
+
+globCom = MPI.COMM_WORLD
+nbp     = globCom.size
+rank    = globCom.rank
 
 class Grille:
     """
@@ -133,19 +138,36 @@ if __name__ == '__main__':
         print("No such pattern. Available ones are:", dico_patterns.keys())
         exit(1)
     grid = Grille(*init_pattern)
-    appli = App((resx, resy), grid)
+    #grid = Grille((100,100))
+    if rank==0:
+        appli = App((resx, resy), grid)
+
 
     loop = True
     while loop:
-        #time.sleep(0.1) # A régler ou commenter pour vitesse maxi
-        t1 = time.time()
-        diff = grid.compute_next_iteration()
-        t2 = time.time()
-        appli.draw()
-        t3 = time.time()
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                loop = False
-        print(f"Temps calcul prochaine generation : {t2-t1:2.2e} secondes, temps affichage : {t3-t2:2.2e} secondes\r", end='')
+
+        # Parallélisation : séparer affichage et calcul
+        # TODO : ajouter prints
+        if rank==1:
+            time.sleep(0.5)
+            t1 = time.time()
+            diff = grid.compute_next_iteration()
+            t2 = time.time()
+            #q1bis : if iter_count%100:...
+            globCom.send(grid,dest=0,tag=1)
+            
+        else:
+            #globCom.Recv(grid.data,...) ? 
+            grid = globCom.recv(source=1,tag=1)
+            #t3 = time.time()
+            appli.grid = grid
+            appli.draw()
+            #t4 = time.time()
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    loop = False
+                    globCom.Abort()
+                    pg.quit()
+            #print(f"Temps calcul prochaine generation : {t2-t1:2.2e} secondes, temps affichage : {t4-t3:2.2e} secondes\r", end='')
 
 pg.quit()

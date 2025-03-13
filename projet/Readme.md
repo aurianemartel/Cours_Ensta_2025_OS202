@@ -14,7 +14,7 @@ La méthode utilisée ici se repose sur une probabilité de propagation du feu e
 
 ## Réalisation séquentielle
 
-On va d'abord s'intéressé aux grandeurs utilisées pour la simulation de l'incendie.
+On va d'abord s'intéresser aux grandeurs utilisées pour la simulation de l'incendie.
 
 ### Grandeurs utilisées
 
@@ -31,14 +31,14 @@ Une case est dite **saine** si elle n'est pas atteinte par le feu. Ces cases dan
 
 Une case est dite **brûlante** si le feu y est en train de se propager. Si l'incendie est en cours dans cette case, la valeur sur la carte d'incendie vaudra 255. Si l'incendie est en cours d'extinction sur cette carte, la valeur sur la carte sera une valeur entre 127 et 1, la valeur d'une case incendie étant divisiée par deux à chaque pas de temps si l'incendie est en cours d'extinction. Sur une case brûlante, la densité de la végétation diminue de un à chaque pas de temps.
 
-Une case est dite **brûlée** si l'incendie y est éteint et que la densité de végétation soit devenue nulle.
+Une case est dite **brûlée** si l'incendie y est éteint et que la densité de végétation est devenue nulle.
 
 ### Modélisation de l'incendie
 
 On considère pour la simulation deux probabilités $p_{1}$ et $p_{2}$ : 
 
 - La probabilité $p_{1}$ correspond à la probabilité qu'une case saine voisine d'une case brûlante soit contaminée par le feu. Cette probabilité dépend de la vitesse du vent et de la position relative de la case saine par rapport à sa case brûlante voisine.
-- La probabilité $p_{2}$ correspond à la probabilité que l'incendie ayan lieu sur une case brûlante commence à s'éteindre.
+- La probabilité $p_{2}$ correspond à la probabilité que l'incendie ayant lieu sur une case brûlante commence à s'éteindre.
 
 **Note** : Une case voisine dans cette simulation est une case adjacente se trouvant soit au Nord, à l'Ouest, au Sud ou à l'Est de la case courante.
 
@@ -85,7 +85,7 @@ Il faudra également conserver le code pour chaque étape décrit ici et rendre 
 
 ### Troisième étape 
 
-- Reprenez la parallélisation OPENMP effectuée à la première étape et utilisez-là pour paralléliser l'avancement en temps du code obtenu à la deuxième étape
+- Reprenez la parallélisation OPENMP effectuée à la première étape et utilisez-la pour paralléliser l'avancement en temps du code obtenu à la deuxième étape
 - Calculez en fonction du nombre de threads l'accélération globale et interprétez le résultat obtenu
 - Calculez en fonction du nombre de threads l'accélération de l'avancement en temps et interprétez le résultat obtenu (en fonction également de l'accélération globale)
 - BONUS : essayez de rendre asynchrone l'affichage et l'avancement en temps. Calculez l'accélération globale obtenue ainsi que son interprétation.

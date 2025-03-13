@@ -4,6 +4,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <mpi.h>
 
 #include "model.hpp"
 #include "display.hpp"
@@ -202,14 +203,39 @@ int main( int nargs, char* args[] )
     auto simu = Model( params.length, params.discretization, params.wind,
                        params.start);
     SDL_Event event;
-    while (simu.update())
-    {
-        if ((simu.time_step() & 31) == 0) 
-            std::cout << "Time step " << simu.time_step() << "\n===============" << std::endl;
-        displayer->update( simu.vegetal_map(), simu.fire_map() );
-        if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
-            break;
-        //std::this_thread::sleep_for(0.1s);
+
+    // Mise en place de l'environnement MPI
+
+    MPI_Init( &nargs, &args );
+	MPI_Comm globComm;
+	MPI_Comm_dup(MPI_COMM_WORLD, &globComm);
+	int nbp;
+	MPI_Comm_size(globComm, &nbp);
+	int rank;
+	MPI_Comm_rank(globComm, &rank);
+
+	MPI_Status status;
+
+    if (rank == 1) {
+        while(simu.update()) {
+            MPI_Send(simu.vegetal_map().data(),simu.vegetal_map().size(),MPI_INT,0,101,globComm);
+            MPI_Send(simu.fire_map().data(),simu.fire_map().size(),MPI_INT,0,101,globComm);
+            if ((simu.time_step() & 31) == 0) 
+                std::cout << "Time step " << simu.time_step() << "\n===============" << std::endl;
+        }
+    }
+
+    if (rank == 0) {
+        while (true) {    
+            MPI_Recv(simu.vegetal_map().data(),simu.vegetal_map().size(),MPI_INT,0,101,globComm,&status);
+            MPI_Recv(simu.fire_map().data(),simu.fire_map().size(),MPI_INT,0,101,globComm,&status);
+            displayer->update( simu.vegetal_map(), simu.fire_map() );
+            if (SDL_PollEvent(&event) && event.type == SDL_QUIT) {
+                MPI_Send()
+                break;
+            } 
+            //std::this_thread::sleep_for(0.1s);
+        }
     }
     return EXIT_SUCCESS;
 }

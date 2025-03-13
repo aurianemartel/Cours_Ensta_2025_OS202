@@ -195,14 +195,7 @@ void display_params(ParamsType const& params)
 
 int main( int nargs, char* args[] )
 {
-    auto params = parse_arguments(nargs-1, &args[1]);
-    display_params(params);
-    if (!check_params(params)) return EXIT_FAILURE;
-
-    auto displayer = Displayer::init_instance( params.discretization, params.discretization );
-    auto simu = Model( params.length, params.discretization, params.wind,
-                       params.start);
-    SDL_Event event;
+    std::cout << "Starting process\n";
 
     // Mise en place de l'environnement MPI
 
@@ -215,27 +208,64 @@ int main( int nargs, char* args[] )
 	MPI_Comm_rank(globComm, &rank);
 
 	MPI_Status status;
+    int return_status;
+    char error_string[MPI_MAX_ERROR_STRING];
+    int length_of_error_string;
 
-    if (rank == 1) {
-        while(simu.update()) {
-            MPI_Send(simu.vegetal_map().data(),simu.vegetal_map().size(),MPI_INT,0,101,globComm);
-            MPI_Send(simu.fire_map().data(),simu.fire_map().size(),MPI_INT,0,101,globComm);
-            if ((simu.time_step() & 31) == 0) 
-                std::cout << "Time step " << simu.time_step() << "\n===============" << std::endl;
-        }
-    }
-
+    auto params = parse_arguments(nargs-1, &args[1]);
+    if (!check_params(params)) return EXIT_FAILURE;
+    
     if (rank == 0) {
+        display_params(params);
+        auto displayer = Displayer::init_instance( params.discretization, params.discretization );
+        SDL_Event event;
+
+        std::vector<std::uint8_t> vegetation_map(params.discretization * params.discretization, 255u); 
+        std::vector<std::uint8_t> fire_map(params.discretization * params.discretization, 0);
+
         while (true) {    
-            MPI_Recv(simu.vegetal_map().data(),simu.vegetal_map().size(),MPI_INT,0,101,globComm,&status);
-            MPI_Recv(simu.fire_map().data(),simu.fire_map().size(),MPI_INT,0,101,globComm,&status);
-            displayer->update( simu.vegetal_map(), simu.fire_map() );
+            return_status = MPI_Recv(vegetation_map.data(),vegetation_map.size(),MPI_UINT8_T,1,101,globComm,&status);
+            if (return_status != MPI_SUCCESS) {
+                MPI_Error_string(return_status, error_string, &length_of_error_string);
+                printf("MPI_Recv failed for vegetal: %s\n", error_string);
+                exit(-1);
+            }
+            return_status = MPI_Recv(fire_map.data(),fire_map.size(),MPI_UINT8_T,1,102,globComm,&status);
+            if (return_status != MPI_SUCCESS) {
+                MPI_Error_string(return_status, error_string, &length_of_error_string);
+                printf("MPI_Recv failed for fire: %s\n", error_string);
+                exit(-1);
+            }
+            displayer->update(vegetation_map, fire_map);
             if (SDL_PollEvent(&event) && event.type == SDL_QUIT) {
-                MPI_Send()
+                MPI_Abort(globComm, EXIT_FAILURE);
                 break;
             } 
             //std::this_thread::sleep_for(0.1s);
         }
     }
+    
+    if (rank == 1) {
+        auto simu = Model( params.length, params.discretization, params.wind, params.start);    
+
+        while(simu.update()) {
+            return_status = MPI_Send(simu.vegetal_map().data(),simu.vegetal_map().size(),MPI_UINT8_T,0,101,globComm);
+            if (return_status != MPI_SUCCESS) {
+                MPI_Error_string(return_status, error_string, &length_of_error_string);
+                printf("MPI_Send failed for vegetal: %s\n", error_string);
+                exit(-1);
+            }
+            return_status = MPI_Send(simu.fire_map().data(),simu.fire_map().size(),MPI_UINT8_T,0,102,globComm);
+            if (return_status != MPI_SUCCESS) {
+                MPI_Error_string(return_status, error_string, &length_of_error_string);
+                printf("MPI_Send failed for fire: %s\n", error_string);
+                exit(-1);
+            }
+            if ((simu.time_step() & 31) == 0) 
+                std::cout << "Time step " << simu.time_step() << "\n===============" << std::endl;
+        }
+    }
+
+    MPI_Finalize();
     return EXIT_SUCCESS;
 }

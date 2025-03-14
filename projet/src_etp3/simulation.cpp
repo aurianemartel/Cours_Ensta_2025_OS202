@@ -215,9 +215,6 @@ int main( int nargs, char* args[] )
 	MPI_Comm_rank(globComm, &rank);
 
 	MPI_Status status;
-    int return_status;
-    char error_string[MPI_MAX_ERROR_STRING];
-    int length_of_error_string;
 
     auto params = parse_arguments(nargs-1, &args[1]);
     if (!check_params(params)) return EXIT_FAILURE;
@@ -232,24 +229,18 @@ int main( int nargs, char* args[] )
         std::vector<std::uint8_t> vegetation_map(params.discretization * params.discretization, 255u); 
         std::vector<std::uint8_t> fire_map(params.discretization * params.discretization, 0);
 
+        int m = 0;
+
         while (true) {    
             // Synchronisation
+            MPI_Send(&m, 1, MPI_INT, 1, 1, globComm);
             MPI_Recv(&Loop, 1, MPI_INT, 1, 1, globComm, &status);
             if(! Loop) {
                 break;
             }
-            return_status = MPI_Recv(vegetation_map.data(),vegetation_map.size(),MPI_UINT8_T,1,101,globComm,&status);
-            if (return_status != MPI_SUCCESS) {
-                MPI_Error_string(return_status, error_string, &length_of_error_string);
-                printf("MPI_Recv failed for vegetal: %s\n", error_string);
-                exit(-1);
-            }
-            return_status = MPI_Recv(fire_map.data(),fire_map.size(),MPI_UINT8_T,1,102,globComm,&status);
-            if (return_status != MPI_SUCCESS) {
-                MPI_Error_string(return_status, error_string, &length_of_error_string);
-                printf("MPI_Recv failed for fire: %s\n", error_string);
-                exit(-1);
-            }
+            MPI_Recv(vegetation_map.data(),vegetation_map.size(),MPI_UINT8_T,1,101,globComm,&status);
+            MPI_Recv(fire_map.data(),fire_map.size(),MPI_UINT8_T,1,102,globComm,&status);
+            
             start_display = std::chrono::system_clock::now();
             displayer->update(vegetation_map, fire_map );
             end_display = std::chrono::system_clock::now();
@@ -260,6 +251,7 @@ int main( int nargs, char* args[] )
                 break;
             } 
             //std::this_thread::sleep_for(0.1s);
+
         }
         end_all = std::chrono::system_clock::now();
         std::chrono::duration < double >time_all_seconds = end_all - start_all;
@@ -273,24 +265,24 @@ int main( int nargs, char* args[] )
 
         bool result = true;
 
+        int flag;
+        int m;
+
         while(result) {
             start_calcul = std::chrono::system_clock::now();
             result = simu.update();
             end_calcul = std::chrono::system_clock::now();
             time_calcul_seconds += end_calcul-start_calcul;
 
-            MPI_Send(&Loop, 1, MPI_INT, 0, 1, globComm);
-            return_status = MPI_Send(simu.vegetal_map().data(),simu.vegetal_map().size(),MPI_UINT8_T,0,101,globComm);
-            if (return_status != MPI_SUCCESS) {
-                MPI_Error_string(return_status, error_string, &length_of_error_string);
-                printf("MPI_Send failed for vegetal: %s\n", error_string);
-                exit(-1);
-            }
-            return_status = MPI_Send(simu.fire_map().data(),simu.fire_map().size(),MPI_UINT8_T,0,102,globComm);
-            if (return_status != MPI_SUCCESS) {
-                MPI_Error_string(return_status, error_string, &length_of_error_string);
-                printf("MPI_Send failed for fire: %s\n", error_string);
-                exit(-1);
+            MPI_Iprobe(0, 1, globComm, &flag, &status);
+
+            if(flag) {
+                // Il y a une demande du displayer
+                MPI_Recv(&m, 1, MPI_INT, 0, 1, globComm, &status);
+
+                MPI_Send(&Loop, 1, MPI_INT, 0, 1, globComm); // Il y a quelque chose à envoyer
+                MPI_Send(simu.vegetal_map().data(),simu.vegetal_map().size(),MPI_UINT8_T,0,101,globComm);
+                MPI_Send(simu.fire_map().data(),simu.fire_map().size(),MPI_UINT8_T,0,102,globComm);
             }
             //if ((simu.time_step() & 31) == 0) 
             //    std::cout << "Time step " << simu.time_step() << "\n===============" << std::endl;
@@ -298,6 +290,7 @@ int main( int nargs, char* args[] )
         // Signale la fin de la simulation
         Loop = 0;
         std::cout << "Temps calcul : " << time_calcul_seconds.count() << " secondes\n";
+        MPI_Recv(&m, 1, MPI_INT, 0, 1, globComm, &status);
         MPI_Send(&Loop, 1, MPI_INT, 0, 1, globComm);
     }
 

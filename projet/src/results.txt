@@ -25,3 +25,12 @@ Parametres définis pour la simulation :
 Temps total : 13.7092 secondes
 Temps calcul : 4.75898 secondes
 Temps display : 7.9162 secondes
+ven. 14 mars 2025 23:48:19 CET
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 13.7914 secondes
+Temps calcul : 4.56593 secondes
+Temps display : 8.2639 secondes

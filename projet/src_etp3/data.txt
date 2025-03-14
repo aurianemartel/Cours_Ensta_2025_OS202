@@ -1,0 +1,22 @@
+# avant optim asynchrone
+Temps calcul : 2.13842 secondes
+Temps total : 11.4663 secondes
+Temps display : 10.7736 secondes
+
+# après optim asynchrone
+Nb threads 1
+Temps calcul : 2.50098 secondes
+Temps total : 2.80132 secondes
+Temps display : 1.56285 secondes
+Nb threads 2
+Temps calcul : 1.65843 secondes
+Temps total : 1.94176 secondes
+Temps display : 0.979191 secondes
+Nb threads 3
+Temps calcul : 1.89308 secondes
+Temps total : 2.17403 secondes
+Temps display : 1.16284 secondes
+Nb threads 4
+Temps calcul : 7.65524 secondes
+Temps total : 7.98798 secondes
+Temps display : 3.54902 secondes

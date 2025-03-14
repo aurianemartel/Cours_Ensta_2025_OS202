@@ -1,0 +1,16 @@
+src_etp0:
+Temps total : 13.7092 secondes
+Temps calcul : 4.75898 secondes
+Temps display : 7.9162 secondes
+nbThreads =  1:
+Temps total : 13.9446 secondes
+Temps calcul : 2.29557 secondes
+Temps display : 10.6573 secondes
+nbThreads =  2:
+Temps total : 13.6174 secondes
+Temps calcul : 1.5594 secondes
+Temps display : 11.0523 secondes
+nbThreads =  4:
+Temps total : 13.4666 secondes
+Temps calcul : 1.67008 secondes
+Temps display : 10.7809 secondes

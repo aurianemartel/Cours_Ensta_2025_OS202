@@ -1,3 +1,5 @@
+
+## avant optim asynchrone
 ven. 14 mars 2025 22:35:54 CET
 Starting process
 Starting process
@@ -9,3 +11,50 @@ Parametres définis pour la simulation :
 Temps calcul : 2.13842 secondes
 Temps total : 11.4663 secondes
 Temps display : 10.7736 secondes
+
+## après optim asynchrone
+ven. 14 mars 2025 22:57:41 CET
+Nb threads 1
+Starting process
+Starting process
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps calcul : 2.50098 secondes
+Temps total : 2.80132 secondes
+Temps display : 1.56285 secondes
+Nb threads 2
+Starting process
+Starting process
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps calcul : 1.65843 secondes
+Temps total : 1.94176 secondes
+Temps display : 0.979191 secondes
+Nb threads 3
+Starting process
+Starting process
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps calcul : 1.89308 secondes
+Temps total : 2.17403 secondes
+Temps display : 1.16284 secondes
+Nb threads 4
+Starting process
+Starting process
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps calcul : 7.65524 secondes
+Temps total : 7.98798 secondes
+Temps display : 3.54902 secondes

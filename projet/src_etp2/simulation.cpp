@@ -260,7 +260,6 @@ int main( int nargs, char* args[] )
                 break;
             } 
             //std::this_thread::sleep_for(0.1s);
-
         }
         end_all = std::chrono::system_clock::now();
         std::chrono::duration < double >time_all_seconds = end_all - start_all;

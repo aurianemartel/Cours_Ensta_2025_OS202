@@ -202,13 +202,19 @@ int main( int nargs, char* args[] )
     auto simu = Model( params.length, params.discretization, params.wind,
                        params.start);
     SDL_Event event;
+
+    #pragma omp parallel for
+    for (int i = 0; i<10; i++) {
+        if (i==0) std::cout << omp_get_num_threads() << std::endl;
+    }
+
     while (simu.update())
     {
         if ((simu.time_step() & 31) == 0) 
             std::cout << "Time step " << simu.time_step() << "\n===============" << std::endl;
         displayer->update( simu.vegetal_map(), simu.fire_map() );
         if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
-            break;
+            exit(-1);
         //std::this_thread::sleep_for(0.1s);
     }
     return EXIT_SUCCESS;

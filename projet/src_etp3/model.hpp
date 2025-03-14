@@ -47,5 +47,6 @@ private:
     double p1{0.}, p2{0.};
     double alphaEastWest, alphaWestEast, alphaSouthNorth, alphaNorthSouth;
 
-    std::unordered_map<std::size_t, std::uint8_t> m_fire_front;
+    //std::unordered_map<std::size_t, std::uint8_t> m_fire_front;
+    std::vector<std::size_t> m_fire_front_v;
 };

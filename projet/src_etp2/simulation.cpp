@@ -215,6 +215,8 @@ int main( int nargs, char* args[] )
     auto params = parse_arguments(nargs-1, &args[1]);
     if (!check_params(params)) return EXIT_FAILURE;
     
+    int Loop;
+
     if (rank == 0) {
         display_params(params);
         auto displayer = Displayer::init_instance( params.discretization, params.discretization );
@@ -224,6 +226,11 @@ int main( int nargs, char* args[] )
         std::vector<std::uint8_t> fire_map(params.discretization * params.discretization, 0);
 
         while (true) {    
+            // Synchronisation
+            MPI_Recv(&Loop, 1, MPI_INT, 1, 1, globComm, &status);
+            if(! Loop) {
+                break;
+            }
             return_status = MPI_Recv(vegetation_map.data(),vegetation_map.size(),MPI_UINT8_T,1,101,globComm,&status);
             if (return_status != MPI_SUCCESS) {
                 MPI_Error_string(return_status, error_string, &length_of_error_string);
@@ -242,13 +249,16 @@ int main( int nargs, char* args[] )
                 break;
             } 
             //std::this_thread::sleep_for(0.1s);
+
         }
     }
     
     if (rank == 1) {
         auto simu = Model( params.length, params.discretization, params.wind, params.start);    
+        Loop = 1;
 
         while(simu.update()) {
+            MPI_Send(&Loop, 1, MPI_INT, 0, 1, globComm);
             return_status = MPI_Send(simu.vegetal_map().data(),simu.vegetal_map().size(),MPI_UINT8_T,0,101,globComm);
             if (return_status != MPI_SUCCESS) {
                 MPI_Error_string(return_status, error_string, &length_of_error_string);
@@ -264,6 +274,9 @@ int main( int nargs, char* args[] )
             if ((simu.time_step() & 31) == 0) 
                 std::cout << "Time step " << simu.time_step() << "\n===============" << std::endl;
         }
+        // Signale la fin de la simulation
+        Loop = 0;
+        MPI_Send(&Loop, 1, MPI_INT, 0, 1, globComm);
     }
 
     MPI_Finalize();

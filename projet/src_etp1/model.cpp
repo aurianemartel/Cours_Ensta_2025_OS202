@@ -76,12 +76,12 @@ Model::Model( double t_length, unsigned t_discretization, std::array<double,2> t
 bool 
 Model::update()
 {
-    
     auto next_front_v = m_fire_front_v;
 
     #pragma omp parallel for
-    for (int i=0;i<m_fire_front_v.size();++i)
+    for (long unsigned int i=0;i<m_fire_front_v.size();++i)
     {
+        // if (i == 0) std::cout << omp_get_num_threads() << std::endl;
         auto index = m_fire_front_v[i];
         // Récupération de la coordonnée lexicographique de la case en feu :
         LexicoIndices coord = get_lexicographic_from_index(index);
@@ -180,13 +180,15 @@ Model::update()
             m_fire_front_v.push_back(c);
         }
     }
-
-    for (int i=0; i<m_fire_front_v.size(); ++i)
+    
+    #pragma omp parallel for 
+    for (long unsigned int i=0; i<m_fire_front_v.size(); ++i)
     {
         auto index = m_fire_front_v[i];
         if (m_vegetation_map[index] > 0)
             m_vegetation_map[index] -= 1;
     }
+        
     m_time_step += 1;
     return !m_fire_front_v.empty();
 }

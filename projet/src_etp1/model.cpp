@@ -1,6 +1,7 @@
 #include <stdexcept>
 #include <cmath>
 #include <iostream>
+#include <fstream>
 #include "model.hpp"
 
 
@@ -87,7 +88,6 @@ Model::update()
         LexicoIndices coord = get_lexicographic_from_index(index);
         // Et de la puissance du foyer
         double        power = log_factor(m_fire_map[index]);
-
 
         // On va tester les cases voisines pour contamination par le feu :
         if (coord.row < m_geometry-1)
@@ -181,7 +181,7 @@ Model::update()
         }
     }
     
-    #pragma omp parallel for 
+    // #pragma omp parallel for 
     for (long unsigned int i=0; i<m_fire_front_v.size(); ++i)
     {
         auto index = m_fire_front_v[i];
@@ -206,4 +206,17 @@ Model::get_lexicographic_from_index( std::size_t t_global_index ) const -> Lexic
     ind_coords.row    = t_global_index/this->geometry();
     ind_coords.column = t_global_index%this->geometry();
     return ind_coords;
+}
+
+void Model::dump(const std::string &filename) {
+    std::ofstream file(filename);
+    for (int num: this->m_vegetation_map) {
+        file << num << std::endl;
+    }
+    file << std::endl;
+    for (int num: this->m_fire_map) {
+        file << num << std::endl;
+    }
+    file << std::endl;
+    file.close();
 }

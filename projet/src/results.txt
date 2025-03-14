@@ -1,0 +1,27 @@
+ven. 14 mars 2025 21:28:26 CET
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 12.6667 secondes
+Temps calcul : 4.68072 secondes
+Temps display : 7.61185 secondes
+ven. 14 mars 2025 22:16:01 CET
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 14.1202 secondes
+Temps calcul : 4.79998 secondes
+Temps display : 8.33685 secondes
+ven. 14 mars 2025 22:18:21 CET
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 13.7092 secondes
+Temps calcul : 4.75898 secondes
+Temps display : 7.9162 secondes

@@ -1,6 +1,7 @@
 #include <stdexcept>
 #include <cmath>
 #include <iostream>
+#include <fstream>
 #include "model.hpp"
 
 
@@ -178,4 +179,17 @@ Model::get_lexicographic_from_index( std::size_t t_global_index ) const -> Lexic
     ind_coords.row    = t_global_index/this->geometry();
     ind_coords.column = t_global_index%this->geometry();
     return ind_coords;
+}
+
+void Model::dump(const std::string &filename) {
+    std::ofstream file(filename);
+    for (int num: this->m_vegetation_map) {
+        file << num << std::endl;
+    }
+    file << std::endl;
+    for (int num: this->m_fire_map) {
+        file << num << std::endl;
+    }
+    file << std::endl;
+    file.close();
 }

@@ -197,6 +197,13 @@ int main( int nargs, char* args[] )
 {
     std::cout << "Starting process\n";
 
+    std::chrono::time_point < std::chrono::system_clock > start_all, end_all;
+    std::chrono::time_point < std::chrono::system_clock > start_calcul, end_calcul;
+    std::chrono::time_point < std::chrono::system_clock > start_display, end_display;
+    start_all = std::chrono::system_clock::now();
+    std::chrono::duration < double >time_calcul_seconds = start_all-start_all;
+    std::chrono::duration < double >time_display_seconds = start_all-start_all;
+
     // Mise en place de l'environnement MPI
 
     MPI_Init( &nargs, &args );
@@ -243,20 +250,35 @@ int main( int nargs, char* args[] )
                 printf("MPI_Recv failed for fire: %s\n", error_string);
                 exit(-1);
             }
-            displayer->update(vegetation_map, fire_map);
+            start_display = std::chrono::system_clock::now();
+            displayer->update(vegetation_map, fire_map );
+            end_display = std::chrono::system_clock::now();
+            time_display_seconds += end_display-start_display;
+
             if (SDL_PollEvent(&event) && event.type == SDL_QUIT) {
                 MPI_Abort(globComm, EXIT_FAILURE);
                 break;
             } 
             //std::this_thread::sleep_for(0.1s);
         }
+        end_all = std::chrono::system_clock::now();
+        std::chrono::duration < double >time_all_seconds = end_all - start_all;
+        std::cout << "Temps total : " << time_all_seconds.count() << " secondes\n";
+        std::cout << "Temps display : " << time_display_seconds.count() << " secondes\n";
     }
     
     if (rank == 1) {
         auto simu = Model( params.length, params.discretization, params.wind, params.start);    
         Loop = 1;
 
-        while(simu.update()) {
+        bool result = true;
+
+        while(result) {
+            start_calcul = std::chrono::system_clock::now();
+            result = simu.update();
+            end_calcul = std::chrono::system_clock::now();
+            time_calcul_seconds += end_calcul-start_calcul;
+
             MPI_Send(&Loop, 1, MPI_INT, 0, 1, globComm);
             return_status = MPI_Send(simu.vegetal_map().data(),simu.vegetal_map().size(),MPI_UINT8_T,0,101,globComm);
             if (return_status != MPI_SUCCESS) {
@@ -270,11 +292,12 @@ int main( int nargs, char* args[] )
                 printf("MPI_Send failed for fire: %s\n", error_string);
                 exit(-1);
             }
-            if ((simu.time_step() & 31) == 0) 
-                std::cout << "Time step " << simu.time_step() << "\n===============" << std::endl;
+            //if ((simu.time_step() & 31) == 0) 
+            //    std::cout << "Time step " << simu.time_step() << "\n===============" << std::endl;
         }
         // Signale la fin de la simulation
         Loop = 0;
+        std::cout << "Temps calcul : " << time_calcul_seconds.count() << " secondes\n";
         MPI_Send(&Loop, 1, MPI_INT, 0, 1, globComm);
     }
 

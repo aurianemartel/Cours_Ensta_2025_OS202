@@ -1,0 +1,11 @@
+ven. 14 mars 2025 22:35:54 CET
+Starting process
+Starting process
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps calcul : 2.13842 secondes
+Temps total : 11.4663 secondes
+Temps display : 10.7736 secondes

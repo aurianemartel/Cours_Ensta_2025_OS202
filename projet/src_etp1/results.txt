@@ -1,0 +1,131 @@
+ven. 14 mars 2025 21:23:04 CET
+nbThreads =  1
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 12.4825 secondes
+Temps calcul : 2.18799 secondes
+Temps display : 10.0106 secondes
+nbThreads =  2
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 12.1156 secondes
+Temps calcul : 1.36619 secondes
+Temps display : 10.4604 secondes
+nbThreads =  4
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 11.3259 secondes
+Temps calcul : 1.19673 secondes
+Temps display : 9.87702 secondes
+ven. 14 mars 2025 21:48:04 CET
+nbThreads =  1
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 12.6567 secondes
+Temps calcul : 2.20666 secondes
+Temps display : 10.1199 secondes
+nbThreads =  2
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 13.4139 secondes
+Temps calcul : 1.4925 secondes
+Temps display : 11.5751 secondes
+nbThreads =  4
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 12.0604 secondes
+Temps calcul : 1.51558 secondes
+Temps display : 10.2286 secondes
+ven. 14 mars 2025 21:54:23 CET
+nbThreads =  1
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+nbThreads =  2
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+nbThreads =  4
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+ven. 14 mars 2025 21:54:57 CET
+nbThreads =  1
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 13.9031 secondes
+Temps calcul : 2.2993 secondes
+Temps display : 11.2745 secondes
+nbThreads =  2
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 13.3024 secondes
+Temps calcul : 1.70042 secondes
+Temps display : 11.2647 secondes
+nbThreads =  4
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 13.2242 secondes
+Temps calcul : 1.79209 secondes
+Temps display : 11.1014 secondes
+ven. 14 mars 2025 21:58:00 CET
+nbThreads =  1
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 13.9446 secondes
+Temps calcul : 2.29557 secondes
+Temps display : 10.6573 secondes
+nbThreads =  2
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 13.6174 secondes
+Temps calcul : 1.5594 secondes
+Temps display : 11.0523 secondes
+nbThreads =  4
+Parametres définis pour la simulation : 
+	Taille du terrain : 1
+	Nombre de cellules par direction : 200
+	Vecteur vitesse : [0, 0]
+	Position initiale du foyer (col, ligne) : 10, 10
+Temps total : 13.4666 secondes
+Temps calcul : 1.67008 secondes
+Temps display : 10.7809 secondes

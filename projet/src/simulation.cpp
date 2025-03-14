@@ -198,18 +198,50 @@ int main( int nargs, char* args[] )
     display_params(params);
     if (!check_params(params)) return EXIT_FAILURE;
 
+    std::chrono::time_point < std::chrono::system_clock > start_all, end_all;
+    std::chrono::time_point < std::chrono::system_clock > start_calcul, end_calcul;
+    std::chrono::time_point < std::chrono::system_clock > start_display, end_display;
+    start_all = std::chrono::system_clock::now();
+    std::chrono::duration < double >time_calcul_seconds = start_all-start_all;
+    std::chrono::duration < double >time_display_seconds = start_all-start_all;
+
     auto displayer = Displayer::init_instance( params.discretization, params.discretization );
     auto simu = Model( params.length, params.discretization, params.wind,
                        params.start);
     SDL_Event event;
-    while (simu.update())
+
+    bool result;
+    while (true)
     {
-        if ((simu.time_step() & 31) == 0) 
-            std::cout << "Time step " << simu.time_step() << "\n===============" << std::endl;
+        start_calcul = std::chrono::system_clock::now();
+        result = simu.update();
+        end_calcul = std::chrono::system_clock::now();
+        time_calcul_seconds += end_calcul-start_calcul;
+        
+        //if ((simu.time_step() & 31) == 0) 
+        //    std::cout << "Time step " << simu.time_step() << "\n===============" << std::endl;
+        
+        if ((simu.time_step() & 255) == 0) 
+            simu.dump("dump_"+ std::to_string(simu.time_step()) + ".txt");
+
+        start_display = std::chrono::system_clock::now();
         displayer->update( simu.vegetal_map(), simu.fire_map() );
+        end_display = std::chrono::system_clock::now();
+        time_display_seconds += end_display-start_display;
+
         if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
+            exit(-1);
+
+        if (!result) {
             break;
+        }
         //std::this_thread::sleep_for(0.1s);
     }
+
+    end_all = std::chrono::system_clock::now();
+    std::chrono::duration < double >time_all_seconds = end_all - start_all;
+    std::cout << "Temps total : " << time_all_seconds.count() << " secondes\n";
+    std::cout << "Temps calcul : " << time_calcul_seconds.count() << " secondes\n";
+    std::cout << "Temps display : " << time_display_seconds.count() << " secondes\n";
     return EXIT_SUCCESS;
 }

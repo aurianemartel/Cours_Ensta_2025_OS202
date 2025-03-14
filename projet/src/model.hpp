@@ -32,6 +32,8 @@ public:
     std::vector<std::uint8_t> fire_map() const { return m_fire_map; }
     std::size_t time_step() const { return m_time_step; }
 
+    void dump(const std::string &filename);
+
 private:
     std::size_t   get_index_from_lexicographic_indices( LexicoIndices t_lexico_indices  ) const;
     LexicoIndices get_lexicographic_from_index        ( std::size_t t_global_index ) const;
